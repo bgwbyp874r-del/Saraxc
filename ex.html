@@ -1,0 +1,317 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Sara.xc Community</title>
+
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+
+<style>
+
+body{
+    background:#0f172a;
+    color:white;
+    font-family:Segoe UI,sans-serif;
+}
+
+.navbar{
+    backdrop-filter:blur(20px);
+    background:rgba(255,255,255,.05);
+    border-bottom:1px solid rgba(255,255,255,.1);
+}
+
+.glass{
+    background:rgba(255,255,255,.05);
+    backdrop-filter:blur(20px);
+    border:1px solid rgba(255,255,255,.08);
+    border-radius:20px;
+}
+
+.logo{
+    font-weight:700;
+    color:#38bdf8;
+}
+
+.search-box{
+    background:rgba(255,255,255,.08);
+    border:none;
+    color:white;
+}
+
+.search-box::placeholder{
+    color:#ccc;
+}
+
+.category-card{
+    transition:.3s;
+    cursor:pointer;
+    padding:20px;
+    text-align:center;
+}
+
+.category-card:hover{
+    transform:translateY(-5px);
+    box-shadow:0 0 25px rgba(56,189,248,.4);
+}
+
+.post-card{
+    padding:20px;
+    margin-bottom:15px;
+}
+
+.post-card:hover{
+    border-color:#38bdf8;
+}
+
+.side-title{
+    color:#38bdf8;
+    font-size:18px;
+    font-weight:600;
+}
+
+.hero{
+    padding:50px 0;
+}
+
+.create-btn{
+    border-radius:50px;
+}
+
+</style>
+</head>
+<body>
+
+<nav class="navbar navbar-expand-lg">
+<div class="container">
+
+<a class="navbar-brand logo" href="#">
+Sara.xc
+</a>
+
+<div class="ms-auto d-flex gap-2">
+
+<input
+class="form-control search-box"
+placeholder="Search community">
+
+<button class="btn btn-primary">
+<i class="bi bi-search"></i>
+</button>
+
+</div>
+
+</div>
+</nav>
+
+<div class="container mt-4">
+
+<div class="hero text-center">
+
+<h1 class="display-4 fw-bold">
+Sara.xc Community
+</h1>
+
+<p class="text-secondary">
+Free Files • Community • Discussions
+</p>
+
+<a href="#"
+class="btn btn-info create-btn text-white">
+<i class="bi bi-plus-circle"></i>
+Create Post
+</a>
+
+</div>
+
+<div class="row">
+
+<div class="col-lg-8">
+
+<div class="glass p-3 mb-4">
+
+<h4>Trending Categories</h4>
+
+<div class="row g-3 mt-2">
+
+<div class="col-md-4">
+<div class="glass category-card">
+📂<br>Free Files
+</div>
+</div>
+
+<div class="col-md-4">
+<div class="glass category-card">
+🔥<br>Desi
+</div>
+</div>
+
+<div class="col-md-4">
+<div class="glass category-card">
+⭐<br>Masala
+</div>
+</div>
+
+<div class="col-md-4">
+<div class="glass category-card">
+📺<br>TV Shows
+</div>
+</div>
+
+<div class="col-md-4">
+<div class="glass category-card">
+🎬<br>Films
+</div>
+</div>
+
+<div class="col-md-4">
+<div class="glass category-card">
+🎞️<br>Web Series
+</div>
+</div>
+
+<div class="col-md-6">
+<div class="glass category-card">
+👩<br>Actress
+</div>
+</div>
+
+<div class="col-md-6">
+<div class="glass category-card">
+🌐<br>All Hubs
+</div>
+</div>
+
+</div>
+
+</div>
+
+<div class="glass post-card">
+
+<h4>Welcome to Sara.xc</h4>
+
+<p>
+Join discussions, share content and explore community posts.
+</p>
+
+<div class="d-flex gap-2">
+
+<button class="btn btn-outline-primary">
+👍 120
+</button>
+
+<button class="btn btn-outline-light">
+💬 24
+</button>
+
+</div>
+
+</div>
+
+<div class="glass post-card">
+
+<h4>Community Update</h4>
+
+<p>
+New categories and features are available.
+</p>
+
+<div class="d-flex gap-2">
+
+<button class="btn btn-outline-primary">
+👍 84
+</button>
+
+<button class="btn btn-outline-light">
+💬 12
+</button>
+
+</div>
+
+</div>
+
+</div>
+
+<div class="col-lg-4">
+
+<div class="glass p-3 mb-3">
+
+<div class="side-title">
+Administrator Files
+</div>
+
+<hr>
+
+<input
+type="password"
+class="form-control mb-2"
+id="adminPass"
+placeholder="Password">
+
+<button
+class="btn btn-danger w-100"
+onclick="unlockAdmin()">
+🔒 Unlock
+</button>
+
+</div>
+
+<div class="glass p-3 mb-3">
+
+<div class="side-title">
+Community Links
+</div>
+
+<hr>
+
+<p>🎨 Canva</p>
+<p>💻 GitHub</p>
+<p>📱 Telegram</p>
+<p>💬 Discord</p>
+<p>👽 Reddit</p>
+
+</div>
+
+<div class="glass p-3">
+
+<div class="side-title">
+Statistics
+</div>
+
+<hr>
+
+<p>Members : 1,245</p>
+<p>Posts : 542</p>
+<p>Categories : 8</p>
+
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+<script>
+
+function unlockAdmin(){
+
+let pass =
+document.getElementById("adminPass").value;
+
+if(pass==="SaraXCAdmin"){
+alert("Administrator Access Granted");
+}else{
+alert("Wrong Password");
+}
+
+}
+
+</script>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+
+</body>
+</html>
