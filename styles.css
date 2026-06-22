@@ -1,4 +1,6 @@
-/* Enhanced CSS with gradients, animations, and better UX */
+/* ============================================
+   ROOT VARIABLES & GENERAL STYLES
+   ============================================ */
 
 :root {
     --primary-color: #3b82f6;
@@ -11,11 +13,31 @@
     --transition-speed: 0.3s;
 }
 
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
 body {
     background: linear-gradient(135deg, var(--dark-bg), var(--secondary-color));
     min-height: 100vh;
     color: var(--text-primary);
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    overflow-x: hidden;
+}
+
+/* ============================================
+   LOGIN PAGE STYLES
+   ============================================ */
+
+.login-container {
+    background: linear-gradient(135deg, var(--dark-bg), var(--secondary-color));
+    min-height: 100vh;
 }
 
 .login-card {
@@ -23,18 +45,79 @@ body {
     backdrop-filter: blur(10px);
     border-radius: 20px;
     border: 1px solid var(--border-color);
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
     animation: slideUp 0.5s ease-out;
 }
 
 @keyframes slideUp {
-    from { opacity: 0; transform: translateY(20px); }
-    to { opacity: 1; transform: translateY(0); }
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
 }
+
+.login-card h1,
+.login-card h2 {
+    color: var(--text-primary);
+    font-weight: 700;
+    background: linear-gradient(135deg, #3b82f6, #8b5cf6);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+}
+
+.login-card .form-control {
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid var(--border-color);
+    color: var(--text-primary);
+    border-radius: 10px;
+    transition: all var(--transition-speed) ease;
+    padding: 12px 15px;
+    font-size: 1rem;
+}
+
+.login-card .form-control:focus {
+    background: rgba(255, 255, 255, 0.1);
+    border-color: var(--primary-color);
+    color: var(--text-primary);
+    box-shadow: 0 0 0 0.2rem rgba(59, 130, 246, 0.25);
+}
+
+.login-card .form-control::placeholder {
+    color: var(--text-muted);
+}
+
+.login-card .form-label {
+    color: var(--text-muted);
+    font-size: 0.95rem;
+    font-weight: 500;
+    margin-bottom: 0.5rem;
+}
+
+.login-card .form-check-label {
+    color: var(--text-muted);
+    font-size: 0.95rem;
+}
+
+.login-card hr {
+    border-color: var(--border-color);
+    opacity: 0.5;
+}
+
+/* ============================================
+   BUTTON STYLES
+   ============================================ */
 
 .btn-primary {
     background: linear-gradient(135deg, var(--primary-color), #2563eb);
     border: none;
     border-radius: 10px;
+    font-weight: 600;
+    padding: 12px 24px;
     transition: all var(--transition-speed) ease;
     box-shadow: 0 4px 15px rgba(59, 130, 246, 0.3);
 }
@@ -42,63 +125,314 @@ body {
 .btn-primary:hover {
     transform: translateY(-2px);
     box-shadow: 0 6px 20px rgba(59, 130, 246, 0.4);
+    background: linear-gradient(135deg, #2563eb, #1d4ed8);
+    color: white;
 }
+
+.btn-primary:active {
+    transform: translateY(0);
+}
+
+/* ============================================
+   NAVBAR STYLES
+   ============================================ */
 
 .navbar {
     background: rgba(2, 6, 23, 0.95) !important;
     backdrop-filter: blur(10px);
     border-bottom: 1px solid var(--border-color);
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
 }
 
 .navbar-brand {
+    font-size: 1.5rem;
+    font-weight: 700;
     background: linear-gradient(135deg, #3b82f6, #8b5cf6);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
+    background-clip: text;
+    transition: transform var(--transition-speed) ease;
 }
 
-.feature-card {
-    background: rgba(30, 41, 59, 0.6);
-    border: 1px solid var(--border-color);
-    border-radius: 15px;
+.navbar-brand:hover {
+    transform: scale(1.05);
+}
+
+.nav-link {
+    color: var(--text-muted) !important;
     transition: all var(--transition-speed) ease;
+    margin: 0 5px;
+    border-radius: 8px;
+    padding: 8px 12px !important;
 }
 
-.feature-card:hover {
-    transform: translateY(-8px);
-    border-color: var(--primary-color);
-    box-shadow: 0 20px 40px rgba(59, 130, 246, 0.2);
+.nav-link:hover {
+    color: var(--primary-color) !important;
+    background: rgba(59, 130, 246, 0.1);
 }
+
+/* ============================================
+   HERO SECTION STYLES
+   ============================================ */
 
 .hero {
     background: linear-gradient(135deg, rgba(59, 130, 246, 0.1), rgba(139, 92, 246, 0.1));
     padding: 100px 20px;
     border-radius: 20px;
+    margin: 40px 0;
 }
 
-.footer {
-    background: rgba(2, 6, 23, 0.95);
-    border-top: 1px solid var(--border-color);
-    padding: 30px 20px;
-    text-align: center;
+.hero h1 {
+    background: linear-gradient(135deg, #3b82f6, #8b5cf6);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    font-weight: 800;
+    animation: fadeIn 0.8s ease-out;
+}
+
+.hero .lead {
+    font-size: 1.3rem;
+    line-height: 1.8;
     color: var(--text-muted);
 }
 
-/* Form Controls */
-.form-control {
-    background: rgba(255, 255, 255, 0.05);
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(-10px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* ============================================
+   FEATURE CARD STYLES
+   ============================================ */
+
+.feature-card {
+    background: rgba(30, 41, 59, 0.6);
     border: 1px solid var(--border-color);
-    color: var(--text-primary);
+    border-radius: 15px;
+    backdrop-filter: blur(10px);
+    transition: all var(--transition-speed) ease;
+    padding: 30px !important;
+    cursor: pointer;
+    overflow: hidden;
+    position: relative;
+}
+
+.feature-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.1), transparent);
+    transition: left 0.5s ease;
+}
+
+.feature-card:hover::before {
+    left: 100%;
+}
+
+.feature-card:hover {
+    transform: translateY(-8px);
+    border-color: var(--primary-color);
+    background: rgba(30, 41, 59, 0.8);
+    box-shadow: 0 20px 40px rgba(59, 130, 246, 0.2);
+}
+
+.feature-card h3 {
+    font-weight: 700;
+    font-size: 1.3rem;
+    margin-bottom: 12px;
+}
+
+.feature-card p {
+    color: var(--text-muted);
+    font-size: 0.95rem;
+    line-height: 1.6;
+}
+
+.feature-icon {
+    transition: transform var(--transition-speed) ease;
+}
+
+.feature-card:hover .feature-icon {
+    transform: scale(1.2) rotate(5deg);
+}
+
+/* ============================================
+   PAGE SECTION STYLES
+   ============================================ */
+
+.page-section {
+    animation: fadeIn 0.5s ease-out;
+    min-height: calc(100vh - 200px);
+}
+
+/* ============================================
+   FOOTER STYLES
+   ============================================ */
+
+.footer {
+    background: rgba(2, 6, 23, 0.95);
+    backdrop-filter: blur(10px);
+    border-top: 1px solid var(--border-color);
+    padding: 30px 20px;
+    text-align: center;
+    margin-top: auto;
+    color: var(--text-muted);
+}
+
+/* ============================================
+   ALERT & STATUS STYLES
+   ============================================ */
+
+.alert {
+    border: 1px solid var(--border-color);
+    border-radius: 10px;
+    background: rgba(239, 68, 68, 0.1);
+    color: #fca5a5;
+    animation: slideDown 0.3s ease-out;
+}
+
+@keyframes slideDown {
+    from {
+        opacity: 0;
+        transform: translateY(-10px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.alert-success {
+    background: rgba(16, 185, 129, 0.1);
+    color: #86efac;
+    border-color: #10b981;
+}
+
+.alert-danger {
+    background: rgba(239, 68, 68, 0.1);
+    color: #fca5a5;
+    border-color: #ef4444;
+}
+
+/* ============================================
+   SPINNER STYLES
+   ============================================ */
+
+.spinner-border-sm {
+    width: 1rem;
+    height: 1rem;
+    border-width: 0.25em;
+}
+
+/* ============================================
+   RESPONSIVE DESIGN
+   ============================================ */
+
+@media (max-width: 768px) {
+    .hero {
+        padding: 50px 20px;
+    }
+
+    .hero h1 {
+        font-size: 2rem;
+    }
+
+    .hero .lead {
+        font-size: 1.1rem;
+    }
+
+    .feature-card {
+        padding: 20px !important;
+    }
+
+    .navbar-brand {
+        font-size: 1.3rem;
+    }
+
+    .login-card {
+        margin: 20px;
+    }
+}
+
+@media (max-width: 480px) {
+    .hero h1 {
+        font-size: 1.5rem;
+    }
+
+    .container {
+        padding: 0 15px;
+    }
+
+    .btn-primary {
+        padding: 10px 20px;
+        font-size: 0.9rem;
+    }
+
+    .feature-card {
+        padding: 15px !important;
+    }
+
+    .nav-link {
+        margin: 5px 0;
+    }
+}
+
+/* ============================================
+   ACCESSIBILITY IMPROVEMENTS
+   ============================================ */
+
+:focus-visible {
+    outline: 2px solid var(--primary-color);
+    outline-offset: 2px;
+}
+
+/* ============================================
+   SCROLLBAR STYLING
+   ============================================ */
+
+::-webkit-scrollbar {
+    width: 10px;
+}
+
+::-webkit-scrollbar-track {
+    background: rgba(255, 255, 255, 0.05);
+}
+
+::-webkit-scrollbar-thumb {
+    background: var(--primary-color);
     border-radius: 10px;
 }
 
-.form-control:focus {
-    background: rgba(255, 255, 255, 0.1);
-    border-color: var(--primary-color);
-    color: var(--text-primary);
+::-webkit-scrollbar-thumb:hover {
+    background: #2563eb;
 }
 
-/* Responsive */
-@media (max-width: 768px) {
-    .hero { padding: 50px 20px; }
-    .hero h1 { font-size: 2rem; }
+/* ============================================
+   UTILITY CLASSES
+   ============================================ */
+
+.d-none {
+    display: none;
+}
+
+.text-muted {
+    color: var(--text-muted) !important;
+}
+
+.text-danger {
+    color: #ef4444 !important;
+}
+
+.text-success {
+    color: #10b981 !important;
 }

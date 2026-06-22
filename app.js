@@ -1,100 +1,294 @@
+/* ============================================
+   APPLICATION STATE MANAGEMENT
+   ============================================ */
+
 const appState = {
     currentUser: null,
     isLoggedIn: false,
     uploads: [],
-    userProfile: { bio: '', location: '', website: '' }
+    userProfile: {
+        bio: '',
+        location: '',
+        website: ''
+    }
 };
+
+// Initialize app
+document.addEventListener('DOMContentLoaded', function() {
+    console.log('Sara.xc Application Initialized');
+    loadUserProfile();
+});
+
+/* ============================================
+   LOGIN FUNCTIONALITY
+   ============================================ */
 
 function handleLogin(event) {
     event.preventDefault();
     
     const username = document.getElementById('username').value.trim();
     const password = document.getElementById('password').value;
+    const remember = document.getElementById('remember').checked;
     const errorDiv = document.getElementById('error');
+    const loginBtn = document.getElementById('loginBtn');
+    const loginSpinner = document.getElementById('loginSpinner');
 
+    // Clear previous error
     errorDiv.classList.add('d-none');
+    errorDiv.innerHTML = '';
 
-    if (validateCredentials(username, password)) {
-        appState.currentUser = username;
-        appState.isLoggedIn = true;
-        transitionToHome();
-    } else {
-        errorDiv.classList.remove('d-none');
-        errorDiv.innerHTML = '<strong>Error:</strong> Invalid credentials';
-        document.getElementById('password').value = '';
-    }
+    // Show loading state
+    loginBtn.style.display = 'none';
+    loginSpinner.style.display = 'inline-block';
+
+    // Simulate API call delay
+    setTimeout(() => {
+        // Validate credentials
+        if (validateCredentials(username, password)) {
+            // Success
+            appState.currentUser = username;
+            appState.isLoggedIn = true;
+
+            // Save remember me preference
+            if (remember) {
+                localStorage.setItem('rememberMe', 'true');
+                localStorage.setItem('savedUsername', username);
+            }
+
+            // Show success message
+            showAlert('Login successful! Welcome, ' + username, 'success');
+
+            // Transition to home page
+            setTimeout(() => {
+                transitionToHome();
+            }, 500);
+        } else {
+            // Error
+            errorDiv.classList.remove('d-none');
+            errorDiv.innerHTML = '<strong>Error:</strong> Invalid username or password. Please try again.';
+            
+            // Clear password field
+            document.getElementById('password').value = '';
+        }
+
+        // Reset button state
+        loginBtn.style.display = 'inline-block';
+        loginSpinner.style.display = 'none';
+    }, 800);
 }
 
 function validateCredentials(username, password) {
-    return username === '@Saraxc' && password === '@Anuradha99';
+    // Demo credentials
+    const validUsername = '@Saraxc';
+    const validPassword = '@Anuradha99';
+
+    return username === validUsername && password === validPassword;
 }
 
 function transitionToHome() {
     const loginPage = document.getElementById('loginPage');
     const homePage = document.getElementById('homePage');
-    
-    loginPage.style.display = 'none';
-    homePage.style.display = 'block';
-    updateProfileDisplay();
+
+    loginPage.style.opacity = '0';
+    loginPage.style.transition = 'opacity 0.5s ease-out';
+
+    setTimeout(() => {
+        loginPage.style.display = 'none';
+        homePage.style.display = 'block';
+        homePage.style.opacity = '0';
+        homePage.style.transition = 'opacity 0.5s ease-out';
+        
+        // Trigger reflow to apply animation
+        void homePage.offsetWidth;
+        homePage.style.opacity = '1';
+
+        updateProfileDisplay();
+    }, 300);
 }
 
+/* ============================================
+   NAVIGATION FUNCTIONALITY
+   ============================================ */
+
 function navigateTo(page) {
-    document.querySelectorAll('.page-section').forEach(s => s.style.display = 'none');
-    const section = document.getElementById(page + 'Section');
-    if (section) section.style.display = 'block';
+    // Hide all sections
+    const sections = document.querySelectorAll('.page-section');
+    sections.forEach(section => {
+        section.style.display = 'none';
+    });
+
+    // Show selected section
+    const targetSection = document.getElementById(page + 'Section');
+    if (targetSection) {
+        targetSection.style.display = 'block';
+    }
+
+    // Scroll to top
     window.scrollTo({ top: 0, behavior: 'smooth' });
 }
 
+/* ============================================
+   UPLOAD FUNCTIONALITY
+   ============================================ */
+
 function handleUpload(event) {
     event.preventDefault();
-    const title = document.getElementById('fileTitle').value;
-    const file = document.getElementById('fileInput').files[0];
+
+    const title = document.getElementById('fileTitle').value.trim();
+    const description = document.getElementById('fileDesc').value.trim();
+    const fileInput = document.getElementById('fileInput');
+    const file = fileInput.files[0];
     const statusDiv = document.getElementById('uploadStatus');
 
+    // Clear previous status
+    statusDiv.innerHTML = '';
+
+    // Validate
     if (!title || !file) {
-        statusDiv.innerHTML = '<div class="alert alert-danger">Please fill all fields</div>';
+        showAlert('Please fill in all required fields', 'danger', statusDiv);
         return;
     }
 
-    statusDiv.innerHTML = '<div class="alert alert-info">Uploading...</div>';
+    // Validate file size (max 50MB)
+    const maxSize = 50 * 1024 * 1024;
+    if (file.size > maxSize) {
+        showAlert('File size exceeds 50MB limit', 'danger', statusDiv);
+        return;
+    }
 
+    // Show loading
+    showAlert('Uploading file...', 'info', statusDiv);
+
+    // Simulate upload
     setTimeout(() => {
-        appState.uploads.push({ title, fileName: file.name, date: new Date().toLocaleString() });
-        statusDiv.innerHTML = '<div class="alert alert-success">✓ Uploaded successfully!</div>';
+        const upload = {
+            id: Date.now(),
+            title: title,
+            description: description,
+            fileName: file.name,
+            fileSize: formatFileSize(file.size),
+            uploadDate: new Date().toLocaleString(),
+            fileType: file.type
+        };
+
+        appState.uploads.push(upload);
+
+        // Success
+        showAlert('✓ File uploaded successfully!', 'success', statusDiv);
+
+        // Reset form
         document.getElementById('uploadForm').reset();
-        setTimeout(() => statusDiv.innerHTML = '', 3000);
+
+        // Clear status after 3 seconds
+        setTimeout(() => {
+            statusDiv.innerHTML = '';
+        }, 3000);
+
     }, 1500);
 }
 
-function handleProfileUpdate(event) {
-    event.preventDefault();
-    
-    appState.userProfile = {
-        bio: document.getElementById('bio').value,
-        location: document.getElementById('location').value,
-        website: document.getElementById('website').value
-    };
-
-    const statusDiv = document.getElementById('profileStatus');
-    statusDiv.innerHTML = '<div class="alert alert-success">✓ Profile updated!</div>';
-    setTimeout(() => statusDiv.innerHTML = '', 3000);
-}
+/* ============================================
+   PROFILE FUNCTIONALITY
+   ============================================ */
 
 function updateProfileDisplay() {
-    const user = appState.currentUser || 'User';
-    document.getElementById('profileUsername').textContent = user;
-    document.getElementById('profileEmail').textContent = user.toLowerCase() + '@sara.xc';
+    const username = appState.currentUser || 'User';
+    // Update profile if needed
 }
 
-function logout() {
-    if (confirm('Logout?')) {
-        appState.isLoggedIn = false;
-        document.getElementById('homePage').style.display = 'none';
-        document.getElementById('loginPage').style.display = 'block';
-        document.getElementById('loginForm').reset();
+function loadUserProfile() {
+    const saved = localStorage.getItem('userProfile');
+    if (saved) {
+        appState.userProfile = JSON.parse(saved);
     }
 }
 
-document.addEventListener('DOMContentLoaded', () => {
-    console.log('✓ Sara.xc loaded');
-});
+/* ============================================
+   LOGOUT FUNCTIONALITY
+   ============================================ */
+
+function logout() {
+    if (confirm('Are you sure you want to logout?')) {
+        appState.isLoggedIn = false;
+        appState.currentUser = null;
+
+        // Clear login form
+        document.getElementById('username').value = '';
+        document.getElementById('password').value = '';
+        document.getElementById('remember').checked = false;
+
+        // Reset page
+        const loginPage = document.getElementById('loginPage');
+        const homePage = document.getElementById('homePage');
+
+        homePage.style.display = 'none';
+        loginPage.style.display = 'block';
+        loginPage.style.opacity = '1';
+
+        showAlert('You have been logged out', 'info');
+    }
+}
+
+/* ============================================
+   UTILITY FUNCTIONS
+   ============================================ */
+
+function showAlert(message, type = 'info', container = null) {
+    const alertDiv = document.createElement('div');
+    alertDiv.className = `alert alert-${type}`;
+    alertDiv.setAttribute('role', 'alert');
+    alertDiv.innerHTML = message;
+
+    if (container) {
+        container.innerHTML = '';
+        container.appendChild(alertDiv);
+    } else {
+        // Create temporary alert
+        const tempContainer = document.createElement('div');
+        tempContainer.className = 'position-fixed top-0 end-0 p-3';
+        tempContainer.style.zIndex = '9999';
+        tempContainer.appendChild(alertDiv);
+        document.body.appendChild(tempContainer);
+
+        // Remove after 3 seconds
+        setTimeout(() => {
+            tempContainer.remove();
+        }, 3000);
+    }
+}
+
+function formatFileSize(bytes) {
+    if (bytes === 0) return '0 Bytes';
+    
+    const k = 1024;
+    const sizes = ['Bytes', 'KB', 'MB', 'GB'];
+    const i = Math.floor(Math.log(bytes) / Math.log(k));
+    
+    return Math.round(bytes / Math.pow(k, i) * 100) / 100 + ' ' + sizes[i];
+}
+
+/* ============================================
+   LOCAL STORAGE HELPERS
+   ============================================ */
+
+function saveToLocalStorage(key, data) {
+    try {
+        localStorage.setItem(key, JSON.stringify(data));
+        return true;
+    } catch (error) {
+        console.error('Error saving to localStorage:', error);
+        return false;
+    }
+}
+
+function getFromLocalStorage(key) {
+    try {
+        const data = localStorage.getItem(key);
+        return data ? JSON.parse(data) : null;
+    } catch (error) {
+        console.error('Error reading from localStorage:', error);
+        return null;
+    }
+}
+
+console.log('✓ Application fully loaded and ready');

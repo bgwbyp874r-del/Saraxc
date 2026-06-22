@@ -1,0 +1,428 @@
+/* ============================================
+   PROFILE PAGE STYLES
+   ============================================ */
+
+:root {
+    --primary-color: #3b82f6;
+    --secondary-color: #1e293b;
+    --dark-bg: #0f172a;
+    --card-bg: rgba(30, 41, 59, 0.8);
+    --border-color: rgba(255, 255, 255, 0.1);
+    --text-primary: #ffffff;
+    --text-muted: #94a3b8;
+    --transition-speed: 0.3s;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+body {
+    background: linear-gradient(135deg, var(--dark-bg), var(--secondary-color));
+    min-height: 100vh;
+    color: var(--text-primary);
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+/* ============================================
+   NAVBAR STYLES
+   ============================================ */
+
+.navbar {
+    background: rgba(2, 6, 23, 0.95) !important;
+    backdrop-filter: blur(10px);
+    border-bottom: 1px solid var(--border-color);
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+}
+
+.navbar-brand {
+    font-size: 1.5rem;
+    font-weight: 700;
+    background: linear-gradient(135deg, #3b82f6, #8b5cf6);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    transition: transform var(--transition-speed) ease;
+}
+
+.navbar-brand:hover {
+    transform: scale(1.05);
+}
+
+.nav-link {
+    color: var(--text-muted) !important;
+    transition: all var(--transition-speed) ease;
+    margin: 0 5px;
+    border-radius: 8px;
+    padding: 8px 12px !important;
+}
+
+.nav-link:hover,
+.nav-link.active {
+    color: var(--primary-color) !important;
+    background: rgba(59, 130, 246, 0.1);
+}
+
+/* ============================================
+   PROFILE CARD STYLES
+   ============================================ */
+
+.profile-card {
+    background: rgba(30, 41, 59, 0.8);
+    border: 1px solid var(--border-color);
+    border-radius: 15px;
+    backdrop-filter: blur(10px);
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+    overflow: hidden;
+}
+
+.profile-avatar {
+    position: relative;
+    width: 150px;
+    height: 150px;
+    margin: 0 auto;
+}
+
+.avatar-container {
+    position: relative;
+    width: 100%;
+    height: 100%;
+}
+
+.avatar-container img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border: 4px solid var(--primary-color);
+    box-shadow: 0 0 30px rgba(59, 130, 246, 0.3);
+}
+
+.avatar-edit {
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    padding: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: var(--primary-color);
+    border: 2px solid var(--dark-bg);
+}
+
+.avatar-edit:hover {
+    background: #2563eb;
+}
+
+/* Stats */
+.stats-container {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 15px;
+}
+
+.stat-box {
+    padding: 15px;
+    background: rgba(59, 130, 246, 0.1);
+    border-radius: 10px;
+    text-align: center;
+    transition: all var(--transition-speed) ease;
+}
+
+.stat-box:hover {
+    background: rgba(59, 130, 246, 0.2);
+    transform: translateY(-3px);
+}
+
+.stat-number {
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: var(--primary-color);
+}
+
+.stat-label {
+    font-size: 0.8rem;
+    color: var(--text-muted);
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+/* ============================================
+   QUICK INFO CARD
+   ============================================ */
+
+.quick-info-card {
+    background: rgba(30, 41, 59, 0.6);
+    border: 1px solid var(--border-color);
+    border-radius: 15px;
+}
+
+.quick-info-card .card-body {
+    padding: 20px;
+}
+
+.info-item {
+    padding-bottom: 12px;
+}
+
+.info-item:not(:last-child) {
+    border-bottom: 1px solid var(--border-color);
+}
+
+.info-item small {
+    display: block;
+    margin-bottom: 5px;
+    font-size: 0.75rem;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.info-item p {
+    color: var(--text-primary);
+    font-size: 0.95rem;
+}
+
+/* ============================================
+   TAB STYLES
+   ============================================ */
+
+.nav-tabs.nav-custom {
+    border-bottom: 1px solid var(--border-color);
+}
+
+.nav-tabs.nav-custom .nav-link {
+    color: var(--text-muted);
+    background: transparent;
+    border: none;
+    border-radius: 10px 10px 0 0;
+    padding: 12px 20px;
+    transition: all var(--transition-speed) ease;
+    position: relative;
+}
+
+.nav-tabs.nav-custom .nav-link:hover {
+    color: var(--primary-color);
+    background: rgba(59, 130, 246, 0.1);
+}
+
+.nav-tabs.nav-custom .nav-link.active {
+    color: var(--primary-color);
+    background: rgba(59, 130, 246, 0.1);
+    border-bottom: 3px solid var(--primary-color);
+}
+
+/* ============================================
+   EMPTY STATE
+   ============================================ */
+
+.empty-state {
+    padding: 60px 20px;
+}
+
+.empty-state i {
+    opacity: 0.5;
+    margin-bottom: 15px;
+}
+
+.empty-state p {
+    margin-bottom: 0;
+    color: var(--text-muted);
+}
+
+/* ============================================
+   SETTINGS CARD
+   ============================================ */
+
+.settings-card {
+    background: rgba(30, 41, 59, 0.6);
+    border: 1px solid var(--border-color);
+    border-radius: 15px;
+}
+
+.settings-section {
+    padding: 15px 0;
+}
+
+.form-check-input {
+    background: rgba(255, 255, 255, 0.1);
+    border: 1px solid var(--border-color);
+    width: 2rem;
+    height: 1rem;
+}
+
+.form-check-input:checked {
+    background: var(--primary-color);
+    border-color: var(--primary-color);
+}
+
+.form-check-label {
+    color: var(--text-primary);
+    margin-left: 10px;
+    cursor: pointer;
+}
+
+/* ============================================
+   MODAL STYLES
+   ============================================ */
+
+.modal-custom {
+    background: rgba(30, 41, 59, 0.95);
+    border: 1px solid var(--border-color);
+    border-radius: 15px;
+}
+
+.modal-custom .modal-header {
+    border-color: var(--border-color);
+    background: transparent;
+}
+
+.modal-custom .modal-body {
+    padding: 25px;
+}
+
+.modal-custom .form-control {
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid var(--border-color);
+    color: var(--text-primary);
+    border-radius: 8px;
+}
+
+.modal-custom .form-control:focus {
+    background: rgba(255, 255, 255, 0.1);
+    border-color: var(--primary-color);
+    color: var(--text-primary);
+}
+
+.modal-custom .form-label {
+    color: var(--text-muted);
+    margin-bottom: 8px;
+}
+
+.modal-custom textarea.form-control {
+    resize: vertical;
+    max-height: 200px;
+}
+
+/* ============================================
+   BUTTON STYLES
+   ============================================ */
+
+.btn-primary {
+    background: linear-gradient(135deg, var(--primary-color), #2563eb);
+    border: none;
+    border-radius: 8px;
+    font-weight: 600;
+    transition: all var(--transition-speed) ease;
+}
+
+.btn-primary:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(59, 130, 246, 0.4);
+    background: linear-gradient(135deg, #2563eb, #1d4ed8);
+    color: white;
+}
+
+.btn-outline-secondary,
+.btn-outline-danger {
+    color: var(--text-muted);
+    border-color: var(--border-color);
+}
+
+.btn-outline-secondary:hover {
+    background: rgba(59, 130, 246, 0.1);
+    border-color: var(--primary-color);
+    color: var(--primary-color);
+}
+
+.btn-outline-danger:hover {
+    background: rgba(239, 68, 68, 0.1);
+    border-color: #ef4444;
+    color: #ef4444;
+}
+
+/* ============================================
+   FOOTER
+   ============================================ */
+
+.footer {
+    background: rgba(2, 6, 23, 0.95);
+    border-top: 1px solid var(--border-color);
+    padding: 30px 20px;
+    text-align: center;
+    color: var(--text-muted);
+    margin-top: 60px;
+}
+
+/* ============================================
+   RESPONSIVE DESIGN
+   ============================================ */
+
+@media (max-width: 992px) {
+    .sticky-top {
+        position: relative !important;
+    }
+}
+
+@media (max-width: 768px) {
+    .stats-container {
+        grid-template-columns: repeat(3, 1fr);
+        gap: 10px;
+    }
+
+    .stat-box {
+        padding: 10px;
+    }
+
+    .stat-number {
+        font-size: 1.2rem;
+    }
+
+    .nav-tabs.nav-custom .nav-link {
+        padding: 10px 12px;
+        font-size: 0.9rem;
+    }
+}
+
+@media (max-width: 480px) {
+    .profile-avatar {
+        width: 120px;
+        height: 120px;
+    }
+
+    .stats-container {
+        gap: 8px;
+    }
+
+    .modal-dialog {
+        margin: 10px;
+    }
+}
+
+/* ============================================
+   SCROLLBAR STYLING
+   ============================================ */
+
+::-webkit-scrollbar {
+    width: 10px;
+}
+
+::-webkit-scrollbar-track {
+    background: rgba(255, 255, 255, 0.05);
+}
+
+::-webkit-scrollbar-thumb {
+    background: var(--primary-color);
+    border-radius: 10px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: #2563eb;
+}
